@@ -74,7 +74,7 @@ class MainActivity : ComponentActivity() {
                                     ShizukuHelper.requestPermission { granted ->
                                         runOnUiThread {
                                             Toast.makeText(
-                                                this,
+                                                this@MainActivity,
                                                 if (granted) "Shizuku ruxsati berildi!" else "Ruxsat berilmadi!",
                                                 Toast.LENGTH_SHORT
                                             ).show()

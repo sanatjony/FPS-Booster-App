@@ -10,15 +10,19 @@ object ShizukuHelper {
     private const val REQUEST_CODE_SHIZUKU_PERMISSION = 1001
 
     fun isShizukuAvailable(): Boolean {
-        return Shizuku.pingBinder()
+        return try {
+            Shizuku.pingBinder()
+        } catch (e: Exception) {
+            false
+        }
     }
 
     fun hasPermission(): Boolean {
         if (!isShizukuAvailable()) return false
-        return if (Shizuku.isPre_V11()) {
-            false
-        } else {
+        return try {
             Shizuku.checkSelfPermission() == PackageManager.PERMISSION_GRANTED
+        } catch (e: Exception) {
+            false
         }
     }
 
@@ -47,7 +51,15 @@ object ShizukuHelper {
      */
     fun runShellCommand(command: String): Result<String> {
         return try {
-            val process = Shizuku.newProcess(arrayOf("sh", "-c", command), null, null)
+            val method = Shizuku::class.java.getDeclaredMethod(
+                "newProcess",
+                Array<String>::class.java,
+                Array<String>::class.java,
+                String::class.java
+            )
+            method.isAccessible = true
+            val process = method.invoke(null, arrayOf("sh", "-c", command), null, null) as Process
+
             val reader = BufferedReader(InputStreamReader(process.inputStream))
             val errorReader = BufferedReader(InputStreamReader(process.errorStream))
 
