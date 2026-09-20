@@ -1,0 +1,29 @@
+{
+  "app_version": "1.0.0",
+  "configurations": {
+    "GL": {
+      "name": "PUBG Mobile Global",
+      "package_name": "com.tencent.ig",
+      "target_dir": "files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Saved/Paks",
+      "file_name": "game_patch_4.6.0.pak",
+      "download_url": "https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/patches/game_patch_4.6.0_GL.pak",
+      "description": "90/120 FPS unlock patch for Global version"
+    },
+    "BGMI": {
+      "name": "Battlegrounds Mobile India",
+      "package_name": "com.pubg.imobile",
+      "target_dir": "files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Saved/Paks",
+      "file_name": "game_patch_4.6.0.pak",
+      "download_url": "https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/patches/game_patch_4.6.0_BGMI.pak",
+      "description": "90/120 FPS unlock patch for BGMI version"
+    },
+    "KR": {
+      "name": "PUBG Mobile Korea/Japan",
+      "package_name": "com.pubg.krmobile",
+      "target_dir": "files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Saved/Paks",
+      "file_name": "game_patch_4.6.0.pak",
+      "download_url": "https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/patches/game_patch_4.6.0_KR.pak",
+      "description": "90/120 FPS unlock patch for KR version"
+    }
+  }
+}
