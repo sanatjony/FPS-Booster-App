@@ -3,30 +3,41 @@ name: Build Android APK
 on:
   push:
     branches: [ "main", "master" ]
-  workflow_dispatch: # GitHub veb-saytida "Run workflow" tugmasi orqali qo'lda ishga tushirish
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout kodni yuklab olish
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Java 17 o'rnatish
+      - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Gradle o'rnatish va sozlash
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: 8.6
 
-      - name: APK ni Build qilish (Gradle)
+      - name: Generate Gradle Wrapper
         run: |
-          gradle assembleDebug --stacktrace
+          gradle wrapper
 
-      - name: Tayyor APK faylini saqlash (Upload Artifact)
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      - name: Build Debug APK
+        run: ./gradlew assembleDebug --no-daemon --stacktrace
+
+      - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: FPS-Booster-App-Debug
